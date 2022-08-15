@@ -23,31 +23,31 @@ file_name.grid(column=1, row=1)
 
 class ImageConvert():
     #open file and present convert button
+    
+    def convert_file(self):
+        def choose_type(a):
+            file_type = a
+            img = Image.open(self.file)
+            img.save(f'{str(file_name.get())}.{file_type}', f'{file_type}')
+        #png button
+        convert_text = tk.StringVar()
+        convert_btn = tk.Button(root, textvariable=convert_text, font='Calibri', bg='#20bebe', fg='white', height=2, width=15, command=lambda:choose_type('png'))
+        convert_text.set('PNG')
+        convert_btn.grid(column=1, row=6)
+        #jpeg button
+        convert_text = tk.StringVar()
+        convert_btn = tk.Button(root, textvariable=convert_text, font='Calibri', bg='#20bebe', fg='white', height=2, width=15, command=lambda:choose_type('jpeg'))
+        convert_text.set('JPEG')
+        convert_btn.grid(column=1, row=7)
     def open_image(self):
         browse_text.set('Loading...')
-        file= askopenfile(parent=root, mode='rb', title='choosefile', filetype=[('Image file', '*')])
-        if file:
+        self.file= askopenfile(parent=root, mode='rb', title='choosefile', filetype=[('Image file', '*')])
+        if self.file:
             #convert button
             convert_text = tk.StringVar()
-            convert_btn = tk.Button(root, textvariable=convert_text, font='Calibri', bg='#20bebe', fg='white', height=2, width=15, command=lambda:convert_file())
+            convert_btn = tk.Button(root, textvariable=convert_text, font='Calibri', bg='#20bebe', fg='white', height=2, width=15, command=lambda:self.convert_file())
             convert_text.set('Convert')
-            convert_btn.grid(column=1, row=5)
-        def convert_file():
-            def choose_type(a):
-                file_type = a
-                img = Image.open(file)
-                img.save(f'{str(file_name.get())}.{file_type}', f'{file_type}')
-            #png button
-            convert_text = tk.StringVar()
-            convert_btn = tk.Button(root, textvariable=convert_text, font='Calibri', bg='#20bebe', fg='white', height=2, width=15, command=lambda:choose_type('png'))
-            convert_text.set('PNG')
-            convert_btn.grid(column=1, row=6)
-            #jpeg button
-            convert_text = tk.StringVar()
-            convert_btn = tk.Button(root, textvariable=convert_text, font='Calibri', bg='#20bebe', fg='white', height=2, width=15, command=lambda:choose_type('jpeg'))
-            convert_text.set('JPEG')
-            convert_btn.grid(column=1, row=7)
-            
+            convert_btn.grid(column=1, row=5)        
 
 
 #browse button
